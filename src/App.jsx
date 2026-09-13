@@ -20,7 +20,7 @@ const PRODUCTS = [
     category: 'embalagens',
     description: 'Ideal para bolos decorados e tortas. Estrutura firme e apresentação profissional.',
     unit: 'Pacote c/ 10 un.',
-    image: '',
+    image: './caixa-bolo.jfif',
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const PRODUCTS = [
     category: 'festas',
     description: 'Alta resistência e brilho uniforme para arcos, painéis e arranjos.',
     unit: 'Pacote c/ 50 un.',
-    image: '',
+    image: './balao.jfif',
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const PRODUCTS = [
     category: 'confeitaria',
     description: 'Ideal para bombons, raspas decorativas, trufas e banhos.',
     unit: 'Barra 1kg',
-    image: '',
+    image: './barra-chocolate.jfif',
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ const PRODUCTS = [
     category: 'descartaveis',
     description: 'Praticidade e resistência para empresas, eventos e uso diário.',
     unit: 'Fardo c/ 1000 un.',
-    image: '',
+    image: './copo-descartavel.jfif',
   },
   {
     id: 5,
@@ -60,7 +60,7 @@ const PRODUCTS = [
     category: 'embalagens',
     description: 'Resistente e sustentável, valoriza a entrega de lanches e refeições.',
     unit: 'Fardo c/ 50 un.',
-    image: '',
+    image: './saco-kraft.jpg',
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ const PRODUCTS = [
     category: 'confeitaria',
     description: 'Sabor acentuado e acabamento brilhante para doces artesanais.',
     unit: 'Pacote 500g',
-    image: '',
+    image: './granulado.jpg',
   },
   {
     id: 8,
@@ -106,7 +106,7 @@ const PRODUCTS = [
     id: 12,
     name: 'Açúcar Colorido para Confeitaria',
     category: 'confeitaria',
-    description: 'Cores vivas e brilho uniforme para finalização de docinhos, maçã do amor e brigadeiros.',
+    description: 'Cores vivas e brilho uniforme para finalização de docinhos e maçã do amor.',
     unit: 'Pote 500g',
     image: './acucar-colorido.jpg',
   },
