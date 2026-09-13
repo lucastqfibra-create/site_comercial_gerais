@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // ==========================================
-// 1. DADOS, CONFIGURAÇÕES E CATEGORIAS
+// 1. DADOS E CONFIGURAÇÕES
 // ==========================================
 const WHATSAPP_NUMBER = '5538997371712'; // Oficial Comercial Gerais
 
@@ -50,7 +50,7 @@ const PRODUCTS = [
     id: 5,
     name: 'Marmitex de Alumínio c/ Fechamento',
     category: 'embalagens',
-    description: 'Vedação segura para delivery de almoços e refeições quentes.',
+    description: 'Vedação segura para delivery de refeições quentes.',
     unit: 'Caixa c/ 100 un.',
     image: '',
   },
@@ -58,7 +58,7 @@ const PRODUCTS = [
     id: 6,
     name: 'Saco Kraft para Delivery',
     category: 'embalagens',
-    description: 'Resistente e sustentável, ideal para valorizar a entrega de pedidos.',
+    description: 'Resistente e sustentável, valoriza a entrega de lanches e refeições.',
     unit: 'Fardo c/ 50 un.',
     image: '',
   },
@@ -156,9 +156,8 @@ function CartProvider({ children }) {
 const useCart = () => useContext(CartContext);
 
 // ==========================================
-// 3. COMPONENTES VISUAIS (HEADER & LOGO)
+// 3. LOGO & CARD DE PRODUTO
 // ==========================================
-
 function Logo() {
   const [imgError, setImgError] = useState(false);
 
@@ -182,7 +181,7 @@ function Logo() {
 
 function ProductCard({ product, onAddToCart }) {
   const handleDirectWhatsApp = () => {
-    const text = `Olá! Vi o produto *${product.name}* no catálogo da Comercial Gerais e gostaria de verificar preço e disponibilidade.`;
+    const text = `Olá! Vi o produto *${product.name}* no catálogo da Comercial Gerais e gostaria de verificar disponibilidade e valores.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -237,7 +236,6 @@ function ProductCard({ product, onAddToCart }) {
 function AboutSection({ onGoToCatalog }) {
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-12">
-      {/* Apresentação Principal */}
       <div className="text-center space-y-4">
         <div className="inline-flex items-center justify-center p-2 bg-emerald-50 rounded-full mb-2">
           <Logo />
@@ -249,17 +247,16 @@ function AboutSection({ onGoToCatalog }) {
           Tradição, variedade e compromisso com o comércio de João Pinheiro
         </p>
         <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto pt-2">
-          A Comercial Gerais faz parte do dia a dia de João Pinheiro há mais de 30 anos. Atuamos como ponto de apoio tanto para as famílias que celebram datas especiais quanto para quem empreende na cidade no ramo da alimentação, confeitaria, lanchonetes e eventos.
+          A Comercial Gerais faz parte da rotina de João Pinheiro há mais de 30 anos. Atendemos tanto famílias que buscam artigos para festas e momentos especiais quanto confeiteiros, lanchonetes e empreendedores locais que dependem de embalagens confiáveis e doces de qualidade.
         </p>
       </div>
 
-      {/* Pilares */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-xs text-center space-y-2">
           <span className="text-3xl">🎂</span>
           <h3 className="font-bold text-gray-900 text-base">Festas & Decoração</h3>
           <p className="text-xs text-gray-500 leading-relaxed">
-            Balões, descartáveis temáticos, velas e artigos para fazer de cada aniversário e reunião familiar um momento inesquecível.
+            Balões, descartáveis temáticos, velas e artigos completos para aniversários e celebrações.
           </p>
         </div>
 
@@ -267,7 +264,7 @@ function AboutSection({ onGoToCatalog }) {
           <span className="text-3xl">🧁</span>
           <h3 className="font-bold text-gray-900 text-base">Confeitaria & Doces</h3>
           <p className="text-xs text-gray-500 leading-relaxed">
-            Ingredientes de alta qualidade, chocolates em barra, confeitos e formas para ajudar confeiteiros a criar produtos de destaque.
+            Chocolates em barra, confeitos, formas e os ingredientes que fazem a diferença na confeitaria.
           </p>
         </div>
 
@@ -275,21 +272,20 @@ function AboutSection({ onGoToCatalog }) {
           <span className="text-3xl">🛵</span>
           <h3 className="font-bold text-gray-900 text-base">Embalagens & Delivery</h3>
           <p className="text-xs text-gray-500 leading-relaxed">
-            Caixas térmicas, sacolas kraft, marmitex e potes para restaurantes e lanchonetes entregarem refeições com segurança e higiene.
+            Caixas térmicas, marmitex, sacolas kraft e potes para restaurantes e lanchonetes.
           </p>
         </div>
       </div>
 
-      {/* Informações da Loja Física */}
       <div className="bg-emerald-900 text-white rounded-3xl p-8 shadow-sm">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-3">
             <span className="bg-emerald-800 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
               Nossa Loja Física
             </span>
-            <h3 className="text-2xl font-bold">Venha nos visitar no Centro</h3>
+            <h3 className="text-2xl font-bold">Visite nossa loja no Centro</h3>
             <p className="text-emerald-100 text-xs sm:text-sm leading-relaxed">
-              Estamos localizados em região central de fácil acesso em João Pinheiro. Faça suas compras no balcão ou consulte nosso catálogo para retirar seu pedido pronto.
+              Compre direto no balcão ou monte sua lista no catálogo online para agilizar sua retirada.
             </p>
             <div className="pt-2 text-xs space-y-1 text-emerald-200">
               <p>📍 <strong>Endereço:</strong> Rua Geraldo Rios, 333 - Centro, João Pinheiro - MG</p>
@@ -300,12 +296,12 @@ function AboutSection({ onGoToCatalog }) {
 
           <div className="flex flex-col gap-3 justify-center items-start md:items-end">
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Olá, Comercial Gerais! Gostaria de tirar uma dúvida sobre a loja e produtos.')}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Olá, Comercial Gerais! Gostaria de falar com um atendente.')}`}
               target="_blank"
               rel="noreferrer"
               className="bg-white hover:bg-emerald-50 text-emerald-900 font-bold text-xs py-3 px-6 rounded-xl shadow transition-colors w-full sm:w-auto text-center"
             >
-              Falar com a Equipe no WhatsApp
+              Falar no WhatsApp
             </a>
             <button
               onClick={onGoToCatalog}
@@ -383,7 +379,7 @@ function CartDrawer() {
               <div className="text-center py-16 text-gray-400">
                 <span className="text-4xl block mb-2">🛒</span>
                 <p className="text-sm font-medium text-gray-600">Sua lista está vazia</p>
-                <p className="text-xs mt-1">Navegue pelas categorias e adicione os produtos desejados.</p>
+                <p className="text-xs mt-1">Navegue pelas categorias e selecione os itens desejados.</p>
               </div>
             ) : (
               cartItems.map((item) => (
@@ -447,7 +443,7 @@ function CartDrawer() {
                   type="text"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Ex: Retirada prevista para hoje"
+                  placeholder="Ex: Retirada hoje à tarde"
                   className="w-full text-xs p-2 border border-gray-300 rounded-lg outline-none focus:border-emerald-700"
                 />
               </div>
@@ -493,10 +489,10 @@ function CartFloatingButton() {
 }
 
 // ==========================================
-// 6. COMPONENTE PRINCIPAL
+// 6. LAYOUT PRINCIPAL
 // ==========================================
 function MainLayout() {
-  const [activeTab, setActiveTab] = useState('catalogo'); // 'catalogo' ou 'sobre'
+  const [activeTab, setActiveTab] = useState('catalogo');
   const [selectedCategory, setSelectedCategory] = useState('todos');
   const { addToCart } = useCart();
 
@@ -507,7 +503,6 @@ function MainLayout() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-gray-50 text-gray-800">
-      {/* Topo / Navbar com Verde Escuro */}
       <header className="bg-emerald-900 text-white shadow-md sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -518,7 +513,6 @@ function MainLayout() {
             </div>
           </div>
 
-          {/* Abas de Navegação */}
           <div className="flex items-center gap-1 sm:gap-2 bg-emerald-950/60 p-1 rounded-xl">
             <button
               onClick={() => setActiveTab('catalogo')}
@@ -542,7 +536,6 @@ function MainLayout() {
             </button>
           </div>
 
-          {/* Link WhatsApp Direto */}
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
@@ -554,12 +547,10 @@ function MainLayout() {
         </div>
       </header>
 
-      {/* Conteúdo Dinâmico com base na aba */}
       {activeTab === 'sobre' ? (
         <AboutSection onGoToCatalog={() => setActiveTab('catalogo')} />
       ) : (
         <>
-          {/* Hero Banner do Catálogo */}
           <section className="bg-gradient-to-b from-emerald-50/80 to-gray-50 py-10 px-4 text-center border-b border-gray-200/50">
             <div className="max-w-2xl mx-auto">
               <span className="bg-emerald-100 text-emerald-900 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -574,7 +565,6 @@ function MainLayout() {
             </div>
           </section>
 
-          {/* Filtros de Categoria */}
           <div className="max-w-6xl mx-auto px-4 py-4 w-full">
             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
               {CATEGORIES.map((cat) => (
@@ -593,7 +583,6 @@ function MainLayout() {
             </div>
           </div>
 
-          {/* Grade de Produtos */}
           <main className="max-w-6xl mx-auto px-4 py-4 flex-1 w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredProducts.map((product) => (
@@ -604,8 +593,25 @@ function MainLayout() {
         </>
       )}
 
-      {/* Rodapé Padrão */}
       <footer className="bg-emerald-950 text-emerald-200 py-8 text-center text-xs mt-12 border-t border-emerald-900">
         <p className="font-bold text-white text-sm">Comercial Gerais LTDA</p>
         <p className="mt-1">Rua Geraldo Rios, 333 - Centro, João Pinheiro - MG</p>
-        <
+        <p className="mt-1 text-emerald-300">Segunda a Sexta: 07h às 18h | Sábado: 07h às 12h</p>
+        <p className="mt-4 text-emerald-400 text-[11px]">
+          Catálogo digital informativo • Pedidos e orçamentos via WhatsApp
+        </p>
+      </footer>
+
+      <CartDrawer />
+      <CartFloatingButton />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <CartProvider>
+      <MainLayout />
+    </CartProvider>
+  );
+}
