@@ -84,7 +84,7 @@ const PRODUCTS = [
     category: 'embalagens',
     description: 'Garrafa plástica descartável com tampa lacre, ideal para sucos naturais e água de coco.',
     unit: 'Fardo c/ 50 ou 100 un.',
-    image: '',
+    image: './embalagem-suco.jpg', // se não renomeou, use './embalagem de suco.jpg'
   },
   {
     id: 10,
@@ -92,7 +92,7 @@ const PRODUCTS = [
     category: 'embalagens',
     description: 'Garrafa resistente com fechamento seguro para sucos, caldo de cana e vitaminas delivery.',
     unit: 'Fardo c/ 50 ou 100 un.',
-    image: '',
+    image: './embalagem-suco.jpg',
   },
   {
     id: 11,
@@ -100,8 +100,8 @@ const PRODUCTS = [
     category: 'embalagens',
     description: 'Garrafa plástica de 1L com vedação lacre, ideal para bebidas em maior volume.',
     unit: 'Fardo c/ 50 un.',
-    image: 'public/embalagem de suco.jpg',
-  }
+    image: './embalagem-suco.jpg',
+  },
 ];
 // ==========================================
 // 2. CONTEXTO DO CARRINHO
@@ -194,7 +194,7 @@ function Logo() {
 
   return (
     <img
-      src="./logo.png"
+      src="./logo.jpg"  // Ajustado para .jpg
       alt="Comercial Gerais Logo"
       onError={() => setImgError(true)}
       className="w-10 h-10 rounded-full object-contain bg-white border border-emerald-600 shadow-xs"
