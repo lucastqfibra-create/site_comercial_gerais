@@ -52,7 +52,7 @@ const PRODUCTS = [
     category: 'embalagens',
     description: 'Vedação segura para delivery de refeições quentes.',
     unit: 'Caixa c/ 100 un.',
-    image: './marmitex',
+    image: './marmitex.jpg',
   },
   {
     id: 6,
