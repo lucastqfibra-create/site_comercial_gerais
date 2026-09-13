@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 // ==========================================
 // 1. DADOS E CONFIGURAÇÕES
 // ==========================================
-const WHATSAPP_NUMBER = '5538997371712'; // Oficial Comercial Gerais
+const WHATSAPP_NUMBER = '5538997371712'; // Comercial Gerais
 
 const CATEGORIES = [
   { id: 'todos', label: 'Todos os Produtos' },
@@ -84,7 +84,7 @@ const PRODUCTS = [
     category: 'embalagens',
     description: 'Garrafa plástica descartável com tampa lacre, ideal para sucos naturais e água de coco.',
     unit: 'Fardo c/ 50 ou 100 un.',
-    image: './embalagem-suco.jpg', // se não renomeou, use './embalagem de suco.jpg'
+    image: './embalagem-suco.jpg',
   },
   {
     id: 10,
@@ -101,8 +101,9 @@ const PRODUCTS = [
     description: 'Garrafa plástica de 1L com vedação lacre, ideal para bebidas em maior volume.',
     unit: 'Fardo c/ 50 un.',
     image: './embalagem-suco.jpg',
-  },
+  }
 ];
+
 // ==========================================
 // 2. CONTEXTO DO CARRINHO
 // ==========================================
@@ -179,14 +180,14 @@ function CartProvider({ children }) {
 const useCart = () => useContext(CartContext);
 
 // ==========================================
-// 3. LOGO & CARD DE PRODUTO
+// 3. LOGO & CARD RESPONSIVO COM ZOOM
 // ==========================================
 function Logo() {
   const [imgError, setImgError] = useState(false);
 
   if (imgError) {
     return (
-      <div className="w-10 h-10 rounded-full border-2 border-emerald-700 bg-white flex items-center justify-center font-serif font-bold text-emerald-800 text-lg shadow-xs">
+      <div className="w-10 h-10 rounded-full border-2 border-emerald-700 bg-white flex items-center justify-center font-serif font-bold text-emerald-800 text-base shadow-xs">
         CG
       </div>
     );
@@ -194,7 +195,7 @@ function Logo() {
 
   return (
     <img
-      src="./logo.jpg"  // Ajustado para .jpg
+      src="./logo.jpg"
       alt="Comercial Gerais Logo"
       onError={() => setImgError(true)}
       className="w-10 h-10 rounded-full object-contain bg-white border border-emerald-600 shadow-xs"
@@ -203,53 +204,113 @@ function Logo() {
 }
 
 function ProductCard({ product, onAddToCart }) {
-  const handleDirectWhatsApp = () => {
-    const text = `Olá! Vi o produto *${product.name}* no catálogo da Comercial Gerais e gostaria de verificar disponibilidade e valores.`;
+  const [isZoomOpen, setIsZoomOpen] = useState(false);
+
+  const handleDirectWhatsApp = (e) => {
+    e.stopPropagation();
+    const text = `Olá! Vi o produto *${product.name}* no catálogo da Comercial Gerais e gostaria de verificar valores e disponibilidade.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-xs border border-gray-100 overflow-hidden flex flex-col justify-between hover:shadow-md transition-all">
-      <div className="h-40 bg-emerald-50/50 flex items-center justify-center p-4 text-center">
-        {product.image ? (
-          <img src={product.image} alt={product.name} className="max-h-full object-contain" />
-        ) : (
-          <div className="text-emerald-800/70 font-semibold text-xs flex flex-col items-center gap-1">
-            <span className="text-2xl">📦</span>
-            <span>{product.name}</span>
+    <>
+      <div className="bg-white rounded-2xl shadow-xs border border-gray-100 overflow-hidden flex flex-col justify-between hover:shadow-md transition-all group">
+        {/* Imagem Proporcional 1:1 */}
+        <div
+          onClick={() => product.image && setIsZoomOpen(true)}
+          className={`relative w-full aspect-square bg-gray-50 flex items-center justify-center p-3 sm:p-4 overflow-hidden ${
+            product.image ? 'cursor-pointer' : ''
+          }`}
+          title={product.image ? 'Toque para ampliar' : ''}
+        >
+          {product.image ? (
+            <>
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+              <span className="absolute bottom-2 right-2 bg-black/60 text-white px-1.5 py-0.5 rounded text-[10px] opacity-0 group-hover:opacity-100 sm:group-hover:opacity-100 transition-opacity">
+                🔍 Zoom
+              </span>
+            </>
+          ) : (
+            <div className="text-emerald-800/60 font-semibold text-xs flex flex-col items-center gap-1 text-center p-2">
+              <span className="text-3xl sm:text-4xl">📦</span>
+              <span className="text-[11px] leading-tight text-gray-400">{product.name}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Textos */}
+        <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between bg-white">
+          <div>
+            <span className="text-[9px] sm:text-[10px] font-bold text-emerald-800 uppercase tracking-wider block truncate">
+              {product.category}
+            </span>
+            <h3 className="font-semibold text-gray-900 text-xs sm:text-sm mt-0.5 line-clamp-2 leading-snug">
+              {product.name}
+            </h3>
+            <p className="text-[11px] text-gray-500 mt-1 line-clamp-2 hidden sm:block">
+              {product.description}
+            </p>
+            <span className="inline-block bg-emerald-50 text-emerald-900 border border-emerald-200/50 text-[10px] sm:text-[11px] font-medium px-2 py-0.5 rounded-md mt-2">
+              {product.unit}
+            </span>
           </div>
-        )}
-      </div>
 
-      <div className="p-4 flex-1 flex flex-col justify-between">
-        <div>
-          <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">
-            {product.category}
-          </span>
-          <h3 className="font-semibold text-gray-900 text-sm mt-1">{product.name}</h3>
-          <p className="text-xs text-gray-500 mt-1 line-clamp-2">{product.description}</p>
-          <span className="inline-block bg-gray-100 text-gray-700 text-[11px] px-2 py-0.5 rounded mt-2 font-medium">
-            {product.unit}
-          </span>
-        </div>
-
-        <div className="mt-4 flex gap-2">
-          <button
-            onClick={() => onAddToCart(product)}
-            className="flex-1 bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-semibold py-2 px-3 rounded-lg transition-colors shadow-xs"
-          >
-            + Adicionar
-          </button>
-          <button
-            onClick={handleDirectWhatsApp}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1 shadow-xs"
-            title="Pedir direto no WhatsApp"
-          >
-            WhatsApp
-          </button>
+          {/* Ações */}
+          <div className="mt-3 flex flex-col sm:flex-row gap-1.5 sm:gap-2 pt-2 border-t border-gray-50">
+            <button
+              onClick={() => onAddToCart(product)}
+              className="w-full sm:flex-1 bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-semibold py-2 px-2 rounded-lg transition-colors shadow-xs"
+            >
+              + Adicionar
+            </button>
+            <button
+              onClick={handleDirectWhatsApp}
+              className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1 shadow-xs"
+              title="Pedir direto no WhatsApp"
+            >
+              <span>💬</span>
+              <span className="sm:hidden">WhatsApp</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Modal Lightbox */}
+      {isZoomOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setIsZoomOpen(false)}
+        >
+          <div
+            className="relative max-w-lg w-full bg-white rounded-2xl p-4 shadow-2xl flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsZoomOpen(false)}
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-800 text-xl font-bold p-1 leading-none"
+            >
+              ✕
+            </button>
+            <h4 className="text-sm font-bold text-gray-800 mb-3 text-center px-6">
+              {product.name}
+            </h4>
+            <div className="w-full max-h-[70vh] flex items-center justify-center bg-gray-50 rounded-xl p-2">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="max-w-full max-h-[65vh] object-contain rounded-lg"
+              />
+            </div>
+            <p className="text-xs text-gray-500 mt-3 text-center">{product.description}</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -402,7 +463,7 @@ function CartDrawer() {
               <div className="text-center py-16 text-gray-400">
                 <span className="text-4xl block mb-2">🛒</span>
                 <p className="text-sm font-medium text-gray-600">Sua lista está vazia</p>
-                <p className="text-xs mt-1">Navegue pelas categorias e selecione os itens desejados.</p>
+                <p className="text-xs mt-1">Navegue pelas categorias e adicione os produtos desejados.</p>
               </div>
             ) : (
               cartItems.map((item) => (
@@ -512,7 +573,7 @@ function CartFloatingButton() {
 }
 
 // ==========================================
-// 6. LAYOUT PRINCIPAL
+// 6. LAYOUT PRINCIPAL (2 COLUNAS NO MOBILE)
 // ==========================================
 function MainLayout() {
   const [activeTab, setActiveTab] = useState('catalogo');
@@ -526,6 +587,7 @@ function MainLayout() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-gray-50 text-gray-800">
+      {/* Topo */}
       <header className="bg-emerald-900 text-white shadow-md sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -570,11 +632,12 @@ function MainLayout() {
         </div>
       </header>
 
+      {/* Conteúdo Dinâmico */}
       {activeTab === 'sobre' ? (
         <AboutSection onGoToCatalog={() => setActiveTab('catalogo')} />
       ) : (
         <>
-          <section className="bg-gradient-to-b from-emerald-50/80 to-gray-50 py-10 px-4 text-center border-b border-gray-200/50">
+          <section className="bg-gradient-to-b from-emerald-50/80 to-gray-50 py-8 sm:py-10 px-4 text-center border-b border-gray-200/50">
             <div className="max-w-2xl mx-auto">
               <span className="bg-emerald-100 text-emerald-900 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                 Catálogo Digital
@@ -588,13 +651,14 @@ function MainLayout() {
             </div>
           </section>
 
-          <div className="max-w-6xl mx-auto px-4 py-4 w-full">
+          {/* Categorias */}
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-4 w-full">
             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
+                  className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
                     selectedCategory === cat.id
                       ? 'bg-emerald-800 text-white shadow-xs'
                       : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-100'
@@ -606,8 +670,9 @@ function MainLayout() {
             </div>
           </div>
 
-          <main className="max-w-6xl mx-auto px-4 py-4 flex-1 w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {/* Grade Responsiva: 2 colunas no celular */}
+          <main className="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-4 flex-1 w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
               ))}
@@ -616,6 +681,7 @@ function MainLayout() {
         </>
       )}
 
+      {/* Rodapé */}
       <footer className="bg-emerald-950 text-emerald-200 py-8 text-center text-xs mt-12 border-t border-emerald-900">
         <p className="font-bold text-white text-sm">Comercial Gerais LTDA</p>
         <p className="mt-1">Rua Geraldo Rios, 333 - Centro, João Pinheiro - MG</p>
@@ -625,6 +691,7 @@ function MainLayout() {
         </p>
       </footer>
 
+      {/* Elementos Flutuantes */}
       <CartDrawer />
       <CartFloatingButton />
     </div>
