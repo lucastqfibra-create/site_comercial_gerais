@@ -77,9 +77,32 @@ const PRODUCTS = [
     description: 'Modelos tradicionais, numéricos e vulcão para comemorações.',
     unit: 'Unidade',
     image: '',
+  },
+  {
+    id: 9,
+    name: 'Garrafa para Suco 300ml c/ Tampa Lacre',
+    category: 'embalagens',
+    description: 'Garrafa plástica descartável com tampa lacre, ideal para sucos naturais e água de coco.',
+    unit: 'Fardo c/ 50 ou 100 un.',
+    image: '',
+  },
+  {
+    id: 10,
+    name: 'Garrafa para Suco 500ml c/ Tampa Lacre',
+    category: 'embalagens',
+    description: 'Garrafa resistente com fechamento seguro para sucos, caldo de cana e vitaminas delivery.',
+    unit: 'Fardo c/ 50 ou 100 un.',
+    image: '',
+  },
+  {
+    id: 11,
+    name: 'Garrafa para Suco 1 Litro c/ Tampa Lacre',
+    category: 'embalagens',
+    description: 'Garrafa plástica de 1L com vedação lacre, ideal para bebidas em maior volume.',
+    unit: 'Fardo c/ 50 un.',
+    image: 'public/embalagem de suco.jpg',
   }
 ];
-
 // ==========================================
 // 2. CONTEXTO DO CARRINHO
 // ==========================================
