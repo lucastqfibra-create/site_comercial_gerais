@@ -50,7 +50,7 @@ const PRODUCTS = [
     id: 5,
     name: 'Marmitex de Alumínio c/ Fechamento',
     category: 'embalagens',
-    description: 'Vedação segura para delivery de refeições quentes.',
+    description: 'Vedação segura para delivery de almoços e refeições quentes.',
     unit: 'Caixa c/ 100 un.',
     image: './marmitex.jpg',
   },
@@ -74,9 +74,9 @@ const PRODUCTS = [
     id: 8,
     name: 'Vela de Aniversário e Faísca',
     category: 'festas',
-    description: 'Modelos tradicionais, numéricos e vulcão para comemorações.',
+    description: 'Modelos tradicionais, numéricos e faísca para comemorações especiais.',
     unit: 'Unidade',
-    image: '',
+    image: './velas-aniversario.jpg',
   },
   {
     id: 9,
@@ -101,6 +101,46 @@ const PRODUCTS = [
     description: 'Garrafa plástica de 1L com vedação lacre, ideal para bebidas em maior volume.',
     unit: 'Fardo c/ 50 un.',
     image: './embalagem-suco.jpg',
+  },
+  {
+    id: 12,
+    name: 'Açúcar Colorido para Confeitaria',
+    category: 'confeitaria',
+    description: 'Cores vivas e brilho uniforme para finalização de docinhos, maçã do amor e brigadeiros.',
+    unit: 'Pote 500g',
+    image: './acucar-colorido.jpg',
+  },
+  {
+    id: 13,
+    name: 'Açúcar de Confeiteiro Impalpável',
+    category: 'confeitaria',
+    description: 'Textura extrafina para glacês, suspiros, macarrons e massas delicadas.',
+    unit: 'Pacote 1kg',
+    image: './acucar_confeiteiro.jpg',
+  },
+  {
+    id: 14,
+    name: 'Assadeira Descartável de Alumínio',
+    category: 'embalagens',
+    description: 'Praticidade para carnes, tortas, assados e encomendas especiais.',
+    unit: 'Unidade / Pacote',
+    image: './assadeira.jpg',
+  },
+  {
+    id: 15,
+    name: 'Bobina Plástica Picotada',
+    category: 'embalagens',
+    description: 'Filme resistente de fundo reto/estrela para açougues, hortifrúti e padarias.',
+    unit: 'Rolo Bobina',
+    image: './bobinas.jpg',
+  },
+  {
+    id: 16,
+    name: 'Guardanapo de Papel Descartável',
+    category: 'descartaveis',
+    description: 'Alta absorção e maciez para restaurantes, lanchonetes e eventos.',
+    unit: 'Fardo c/ pacotes',
+    image: './guardanapo.jpg',
   }
 ];
 
@@ -243,7 +283,7 @@ function ProductCard({ product, onAddToCart }) {
           )}
         </div>
 
-        {/* Textos */}
+        {/* Textos e Detalhes */}
         <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between bg-white">
           <div>
             <span className="text-[9px] sm:text-[10px] font-bold text-emerald-800 uppercase tracking-wider block truncate">
